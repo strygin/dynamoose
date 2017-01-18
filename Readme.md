@@ -681,7 +681,7 @@ Return the number of matching items, rather than the matching items themselves.
 
 #### query.counts()
 
-Return the counts objects of matching items, rather than the matching items themselves:
+Return the counts object of matching items, rather than the matching items themselves:
 
 ```js
 {
@@ -797,7 +797,7 @@ Return the number of matching items, rather than the matching items themselves.
 
 #### scan.counts()
 
-Return the counts objects of matching items, rather than the matching items themselves:
+Return the counts object of matching items, rather than the matching items themselves:
 
 ```js
 {

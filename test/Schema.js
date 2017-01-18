@@ -16,10 +16,10 @@ var Schema = dynamoose.Schema;
 var should = require('should');
 
 
-describe('Schema tests', function (){
+describe('Schema tests', function() {
   this.timeout(5000);
 
-  it('Simple schema', function (done) {
+  it('Simple schema', function(done) {
     var schemaObj = {
      id: Number,
      name: String,
@@ -29,11 +29,11 @@ describe('Schema tests', function (){
      aMap: {
         mapId: Number,
         mapName: String,
-        anotherMap:{
-          m1:String,
+        anotherMap: {
+          m1: String,
         }
      },
-     aList:[
+     aList: [
         {
           listMapId: Number,
           listMapName: String
@@ -78,7 +78,7 @@ describe('Schema tests', function (){
     done();
   });
 
-  it('Schema with basic options', function (done) {
+  it('Schema with basic options', function(done) {
     var schema = new Schema({
       id: {
         type: Number,
@@ -108,8 +108,8 @@ describe('Schema tests', function (){
       aMap: {
         type: 'map',
         map: {
-          mapId: {type: Number, required:true },
-          mapName: {type: String, required:true }
+          mapId: {type: Number, required: true },
+          mapName: {type: String, required: true }
         }
       },
       aList: {
@@ -117,7 +117,7 @@ describe('Schema tests', function (){
         list: [
           {
             listMapId: {type: Number, default: 1},
-            listMapName: {type: String, default:"SomeName"}
+            listMapName: {type: String, default: 'SomeName'}
           }
         ]
       }
@@ -166,7 +166,7 @@ describe('Schema tests', function (){
     done();
   });
 
-  it('Schema with timestamps options', function (done) {
+  it('Schema with timestamps options', function(done) {
     var schema1 = new Schema({
       id: {
         type: Number,
@@ -177,7 +177,7 @@ describe('Schema tests', function (){
         type: String,
         required: true
       },
-    }, 
+    },
     {
       throughput: {read: 10, write: 2},
       timestamps: true
@@ -193,7 +193,7 @@ describe('Schema tests', function (){
         type: String,
         required: true
       },
-    }, 
+    },
     {
       throughput: {read: 10, write: 2},
       timestamps: { createdAt: 'createDate', updatedAt: 'lastUpdate'}
@@ -227,7 +227,7 @@ describe('Schema tests', function (){
     schema1.timestamps.createdAt.should.be.equal('createdAt');
     schema1.timestamps.updatedAt.should.exists;
     schema1.timestamps.updatedAt.should.be.equal('updatedAt');
-    
+
     schema1.attributes.createdAt.type.name.should.eql('date');
     should.exist(schema1.attributes.createdAt.default);
 
@@ -241,7 +241,7 @@ describe('Schema tests', function (){
     schema2.timestamps.createdAt.should.be.equal('createDate');
     schema2.timestamps.updatedAt.should.exists;
     schema2.timestamps.updatedAt.should.be.equal('lastUpdate');
-    
+
     schema2.attributes.createDate.type.name.should.eql('date');
     should.exist(schema2.attributes.createDate.default);
 
@@ -252,7 +252,7 @@ describe('Schema tests', function (){
   });
 
 
-  it('Schema with use Document Types', function (done) {
+  it('Schema with use Document Types', function(done) {
     var schema = new Schema({
       id: {
         type: Number,
@@ -272,11 +272,11 @@ describe('Schema tests', function (){
       aMap: {
         mapId: Number,
         mapName: String,
-        anotherMap:{
-          m1:String,
+        anotherMap: {
+          m1: String,
         }
       },
-      aList:[
+      aList: [
         {
           listMapId: Number,
           listMapName: String
@@ -285,8 +285,8 @@ describe('Schema tests', function (){
       anotherMap: {
         type: 'map',
         map: {
-          mapId: {type: Number, required:true },
-          mapName: {type: String, required:true }
+          mapId: {type: Number, required: true },
+          mapName: {type: String, required: true }
         }
       },
       anotherList: {
@@ -294,7 +294,7 @@ describe('Schema tests', function (){
         list: [
           {
             listMapId: {type: Number, default: 1},
-            listMapName: {type: String, default:"SomeName"}
+            listMapName: {type: String, default: 'SomeName'}
           }
         ]
       }
@@ -311,9 +311,9 @@ describe('Schema tests', function (){
     schema.attributes.aMap.type.name.should.eql('map');
     schema.attributes.aMap.attributes.mapId.type.name.should.eql('number');
     schema.attributes.aMap.attributes.mapName.type.name.should.eql('string');
-    should.not.exist( schema.attributes.aMap.attributes.mapId.default);
-    should.not.exist( schema.attributes.aMap.attributes.mapId.validator);
-    should( schema.attributes.aMap.attributes.mapId.required).not.be.ok;
+    should.not.exist(schema.attributes.aMap.attributes.mapId.default);
+    should.not.exist(schema.attributes.aMap.attributes.mapId.validator);
+    should(schema.attributes.aMap.attributes.mapId.required).not.be.ok;
     schema.attributes.aMap.attributes.anotherMap.attributes.m1.type.name.should.eql('string');
 
     schema.attributes.anotherMap.attributes.mapId.type.name.should.eql('number');
@@ -333,7 +333,7 @@ describe('Schema tests', function (){
     done();
   });
 
-  it('Schema with secondary indexes', function (done) {
+  it('Schema with secondary indexes', function(done) {
     var schema = new Schema({
       ownerId: {
         type: Number,
@@ -423,7 +423,7 @@ describe('Schema tests', function (){
     color.indexes.colorLocalIndex.should.not.have.property('throughput');
     color.indexes.should.have.property('colorGlobalIndex');
     color.indexes.colorGlobalIndex.should.have.property('global', true);
-    color.indexes.colorGlobalIndex.should.have.property('project', ['name', 'breed'] );
+    color.indexes.colorGlobalIndex.should.have.property('project', ['name', 'breed']);
     color.indexes.colorGlobalIndex.should.not.have.property('rangeKey');
     color.indexes.colorGlobalIndex.should.have.property('throughput', {read: 1, write: 1});
 
@@ -450,7 +450,7 @@ describe('Schema tests', function (){
   });
 
 
-  it('Schema with added instance methods', function (done) {
+  it('Schema with added instance methods', function(done) {
 
     dynamoose.setDefaults({ prefix: '' });
 
@@ -468,8 +468,8 @@ describe('Schema tests', function (){
     fizz.lastcall.should.eql('meooowwww');
 
     schema.method({
-      purr:function(){this.didpurr = 1;},
-      scratch:function(){this.didscratch = 1;}
+      purr: function() {this.didpurr = 1;},
+      scratch: function() {this.didscratch = 1;}
     });
 
     var Tabby = dynamoose.model('Tabby', schema);
@@ -485,10 +485,10 @@ describe('Schema tests', function (){
     tom.didpurr.should.be.ok;
 
 
-    Tabby.$__.table.delete(function () {
+    Tabby.$__.table.delete(function() {
       delete dynamoose.models.Tabby;
 
-      Kitty.$__.table.delete(function () {
+      Kitty.$__.table.delete(function() {
         delete dynamoose.models.Kitty;
         done();
       });
@@ -496,7 +496,7 @@ describe('Schema tests', function (){
 
   });
 
-  it('Schema with added static methods', function (done) {
+  it('Schema with added static methods', function(done) {
 
     dynamoose.setDefaults({ prefix: '' });
 
@@ -504,30 +504,30 @@ describe('Schema tests', function (){
      name: String
     });
 
-    staticSchema.static('findKittenName', function (name){
+    staticSchema.static('findKittenName', function(name) {
       return name + '\'s kitten';
     });
 
-    var Cat = dynamoose.model('Cat',staticSchema);
+    var Cat = dynamoose.model('Cat', staticSchema);
     var kitten = Cat.findKittenName('sue');
     kitten.should.eql('sue\'s kitten');
 
     staticSchema.static({
-      findCatsByOwner:function(owner){return owner + 'fluffy';},
-      findCatsByRace:function(owner){return owner + 'bobbly';}
+      findCatsByOwner: function(owner) {return owner + 'fluffy';},
+      findCatsByRace: function(owner) {return owner + 'bobbly';}
     });
 
-    var Cats = dynamoose.model('Cats',staticSchema);
+    var Cats = dynamoose.model('Cats', staticSchema);
     var catsByOwner = Cats.findCatsByOwner('fred');
     var catsByRace = Cats.findCatsByRace('siamese');
 
     catsByOwner.should.eql('fredfluffy');
     catsByRace.should.eql('siamesebobbly');
 
-    Cat.$__.table.delete(function () {
+    Cat.$__.table.delete(function() {
       delete dynamoose.models.Cat;
 
-      Cats.$__.table.delete(function () {
+      Cats.$__.table.delete(function() {
         delete dynamoose.models.Cats;
         done();
       });
@@ -535,18 +535,18 @@ describe('Schema tests', function (){
   });
 
 
-  it('Schema with added virtual methods', function (done) {
+  it('Schema with added virtual methods', function(done) {
 
     var schema = new Schema({
      name: String,
      owner: String
     });
 
-    schema.virtual('mergedname').get(function () {
-      return (this._mergedname)?this._mergedname:this.name;//this.name + this.owner;
+    schema.virtual('mergedname').get(function() {
+      return (this._mergedname) ? this._mergedname : this.name;//this.name + this.owner;
     });
 
-    schema.virtual('mergedname').set(function(v){
+    schema.virtual('mergedname').set(function(v) {
       this._mergedname = v;
     });
 
@@ -563,7 +563,7 @@ describe('Schema tests', function (){
     tim.mergedname.should.eql('george');
 
 
-    Cat.$__.table.delete(function () {
+    Cat.$__.table.delete(function() {
       delete dynamoose.models.Cat;
       done();
     });

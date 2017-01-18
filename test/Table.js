@@ -16,14 +16,14 @@ var Table = dynamoose.Table;
 var should = require('should');
 
 
-describe('Table tests', function () {
+describe('Table tests', function() {
   this.timeout(5000);
 
   var schema = new Schema({id: Number, name: String, childern: [Number], address: {street: String, city: String}});
   var globalIndexSchema = new Schema({
     ownerId: {
       type: Number,
-      validate: function (v) {
+      validate: function(v) {
         return v > 0;
       },
       hashKey: true
@@ -58,37 +58,37 @@ describe('Table tests', function () {
   var table = new Table('person', schema, null, dynamoose);
   var globalIndexTable = new Table('dog', globalIndexSchema, null, dynamoose);
 
-  it('Create simple table', function (done) {
+  it('Create simple table', function(done) {
 
-    table.create(function (err) {
+    table.create(function(err) {
       should.not.exist(err);
       done();
     });
   });
 
-  it('Describe simple table', function (done) {
+  it('Describe simple table', function(done) {
 
-    table.describe(function (err, data) {
-      should.not.exist(err);
-      should.exist(data);
-      done();
-    });
-  });
-
-  it('Delete simple table', function (done) {
-
-    table.delete(function (err, data) {
+    table.describe(function(err, data) {
       should.not.exist(err);
       should.exist(data);
       done();
     });
   });
 
-  it('Describe missing table', function (done) {
+  it('Delete simple table', function(done) {
+
+    table.delete(function(err, data) {
+      should.not.exist(err);
+      should.exist(data);
+      done();
+    });
+  });
+
+  it('Describe missing table', function(done) {
     var missing = new Table('missing', schema, null, dynamoose);
 
 
-    missing.describe(function (err, data) {
+    missing.describe(function(err, data) {
       should.exist(err);
       should.not.exist(data);
       err.code.should.eql('ResourceNotFoundException');
@@ -96,24 +96,24 @@ describe('Table tests', function () {
     });
   });
 
-  it('Create table with global index with non indexed range key', function (done) {
+  it('Create table with global index with non indexed range key', function(done) {
 
-    globalIndexTable.create(function (err) {
+    globalIndexTable.create(function(err) {
       should.not.exist(err);
       done();
     });
   });
 
-  it('Delete table with global index', function (done) {
+  it('Delete table with global index', function(done) {
 
-    globalIndexTable.delete(function (err, data) {
+    globalIndexTable.delete(function(err, data) {
       should.not.exist(err);
       should.exist(data);
       done();
     });
   });
 
-  it('create DMSong with limited projection', function (done) {
+  it('create DMSong with limited projection', function(done) {
     var Song = dynamoose.model('DMSong', {
         id: {
           type: Number,
@@ -161,7 +161,7 @@ describe('Table tests', function () {
     tom_sawyer.save();
     var params = {TableName: 'DMSong'};
     setTimeout(function() {
-      dynamoose.ddb().describeTable(params, function (err, data) {
+      dynamoose.ddb().describeTable(params, function(err, data) {
         if (err) {
           done(err);
         }
@@ -181,7 +181,7 @@ describe('Table tests', function () {
       });
     }, 2000);
   });
-  it('update DMSong with broader projection', function (done) {
+  it('update DMSong with broader projection', function(done) {
     var Song = dynamoose.model('DMSong', {
         id: {
           type: Number,
@@ -233,12 +233,12 @@ describe('Table tests', function () {
 
     var params = {TableName: 'DMSong'};
     setTimeout(function() {
-      dynamoose.ddb().describeTable(params, function (err, data) {
+      dynamoose.ddb().describeTable(params, function(err, data) {
         if (err) {
           done(err);
         }
         else {
-          console.log("---------------------REVISED TABLE");
+          console.log('---------------------REVISED TABLE');
           console.log(JSON.stringify(data, null, 2));
           var found = false;
           for (var i in data.Table.GlobalSecondaryIndexes) {
