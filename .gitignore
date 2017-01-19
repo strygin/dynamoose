@@ -5,6 +5,7 @@ node_modules/
 .settings
 .session.vim
 coverage.html
+test/coverage
 lib-cov/
 .vscode
 

@@ -1,6 +1,5 @@
 'use strict';
 
-
 var dynamoose = require('../');
 dynamoose.AWS.config.update({
   accessKeyId: 'AKID',
@@ -13,7 +12,6 @@ dynamoose.local();
 var Schema = dynamoose.Schema;
 
 var should = require('should');
-
 
 describe('Scan', function() {
   this.timeout(5000);

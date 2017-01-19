@@ -13,7 +13,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "coverage": "grunt coverage"
   },
   "keywords": [
     "dynamodb",
@@ -40,14 +41,17 @@
     "grunt": "*",
     "grunt-contrib-jshint": "*",
     "grunt-mocha-test": "*",
-    "blanket": "1.1.5",
+    "grunt-istanbul": "^0.7.2",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-env": "^0.4.4",
     "travis-cov": "*"
   },
   "dependencies": {
+    "aws-sdk": "^2.7.25",
     "debug": "*",
-    "aws-sdk": "^2.1.0",
-    "q": "~1.0.1",
     "hooks": "0.3.2",
+    "q": "~1.0.1",
     "underscore": "^1.8.3"
   }
 }
