@@ -24,43 +24,20 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        src: ['test/*.js']
-      },
-      coverage: {
-        options: {
-          reporter: 'spec'
-        },
         src: ['test/**/*.js']
       }
     },
-    storeCoverage: {
-      options: {
-        dir: 'test/coverage/reports'
-      }
-    },
-    env: {
+    mocha_istanbul: {
       coverage: {
-        APP_DIR_FOR_CODE_COVERAGE: '../test/coverage/instrument/lib/'
+        src: 'test',
+        options: {
+          mask: '*.js'
+        }
       }
     },
     clean: {
       coverage: {
-        src: ['test/coverage/']
-      }
-    },
-    instrument: {
-      files: 'lib/*.js',
-      options: {
-        lazy: true,
-        basePath: 'test/coverage/instrument/'
-      }
-    },
-    makeReport: {
-      src: 'test/coverage/reports/**/*.json',
-      options: {
-        type: 'lcov',
-        dir: 'test/coverage/reports',
-        print: 'detail'
+        src: ['coverage/']
       }
     }
   });
@@ -69,14 +46,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-istanbul');
-  grunt.loadNpmTasks('grunt-env');
+  //grunt.loadNpmTasks('grunt-istanbul');
+  grunt.loadNpmTasks('grunt-mocha-istanbul');
 
-  // Register the default tasks
+  grunt.event.on('coverage', function(lcovFileContents, done) {
+    done();
+  });
+
   grunt.registerTask('default', ['jshint', 'mochaTest']);
-
   grunt.registerTask('test', ['jshint', 'mochaTest:test']);
+  grunt.registerTask('coverage', ['jshint', 'clean:coverage', 'mocha_istanbul:coverage']);
 
-  grunt.registerTask('coverage', ['jshint', 'clean:coverage', 'instrument', 'mochaTest:coverage',
-    'storeCoverage', 'makeReport']);
 };
+
