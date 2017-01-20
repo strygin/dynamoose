@@ -1,6 +1,5 @@
 'use strict';
 
-
 var dynamoose = require('../');
 dynamoose.AWS.config.update({
   accessKeyId: 'AKID',
@@ -14,7 +13,6 @@ var Schema = dynamoose.Schema;
 var Table = dynamoose.Table;
 
 var should = require('should');
-
 
 describe('Table tests', function() {
   this.timeout(5000);
@@ -115,48 +113,48 @@ describe('Table tests', function() {
 
   it('create DMSong with limited projection', function(done) {
     var Song = dynamoose.model('DMSong', {
-        id: {
-          type: Number,
-          required: true,
-          hashKey: true,
-        },
-        band: {
-          type: String,
-          required: true,
-          trim: true
-        },
-        album: {
-          type: String,
-          required: true,
-          trim: true,
-          index: {
-            global: true,
-            rangeKey: 'id',
-            name: 'albumIndex',
-            project: ['band', 'album'],
-            throughput: 5 // read and write are both 5
+          id: {
+            type: Number,
+            required: true,
+            hashKey: true,
+          },
+          band: {
+            type: String,
+            required: true,
+            trim: true
+          },
+          album: {
+            type: String,
+            required: true,
+            trim: true,
+            index: {
+              global: true,
+              rangeKey: 'id',
+              name: 'albumIndex',
+              project: ['band', 'album'],
+              throughput: 5 // read and write are both 5
+            }
+          },
+          song: {
+            type: String,
+            required: true,
+            trim: true,
+            index: {
+              global: true,
+              rangeKey: 'id',
+              name: 'songIndex',
+              project: true, // ProjectionType: ALL
+              throughput: 5 // read and write are both 5
+            }
+          },
+          track: {
+            type: Number,
+            required: false,
           }
         },
-        song: {
-          type: String,
-          required: true,
-          trim: true,
-          index: {
-            global: true,
-            rangeKey: 'id',
-            name: 'songIndex',
-            project: true, // ProjectionType: ALL
-            throughput: 5 // read and write are both 5
-          }
-        },
-        track: {
-          type: Number,
-          required: false,
-        }
-      },
-      {
-        create: true, update: true
-      });
+        {
+          create: true, update: true
+        });
     var tom_sawyer = new Song({id: 1, band: 'Rush', album: 'Moving Pictures', song: 'Tom Sawyer', track: 1});
     tom_sawyer.save();
     var params = {TableName: 'DMSong'};
@@ -183,50 +181,50 @@ describe('Table tests', function() {
   });
   it('update DMSong with broader projection', function(done) {
     var Song = dynamoose.model('DMSong', {
-        id: {
-          type: Number,
-          required: true,
-          hashKey: true,
-        },
-        band: {
-          type: String,
-          required: true,
-          trim: true
-        },
-        album: {
-          type: String,
-          required: true,
-          trim: true,
-          index: {
-            global: true,
-            rangeKey: 'id',
-            name: 'albumIndex',
-            project: true, // ProjectionType: ALL
-            throughput: 5 // read and write are both 5
+          id: {
+            type: Number,
+            required: true,
+            hashKey: true,
+          },
+          band: {
+            type: String,
+            required: true,
+            trim: true
+          },
+          album: {
+            type: String,
+            required: true,
+            trim: true,
+            index: {
+              global: true,
+              rangeKey: 'id',
+              name: 'albumIndex',
+              project: true, // ProjectionType: ALL
+              throughput: 5 // read and write are both 5
+            }
+          },
+          song: {
+            type: String,
+            required: true,
+            trim: true,
+            index: {
+              global: true,
+              rangeKey: 'id',
+              name: 'songIndex',
+              project: true, // ProjectionType: ALL
+              throughput: 5 // read and write are both 5
+            }
+          },
+          track: {
+            type: Number,
+            required: false,
           }
         },
-        song: {
-          type: String,
-          required: true,
-          trim: true,
-          index: {
-            global: true,
-            rangeKey: 'id',
-            name: 'songIndex',
-            project: true, // ProjectionType: ALL
-            throughput: 5 // read and write are both 5
-          }
-        },
-        track: {
-          type: Number,
-          required: false,
-        }
-      },
-      {
-        create: true,
-        update: true,
-        waitForActive: true
-      });
+        {
+          create: true,
+          update: true,
+          waitForActive: true
+        });
 
     var red_barchetta = new Song({id: 2, band: 'Rush', album: 'Moving Pictures', song: 'Red Barchetta', track: 2});
     red_barchetta.save();
