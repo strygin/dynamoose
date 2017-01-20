@@ -1,6 +1,6 @@
 'use strict';
 
-var dynamoose = require('../');
+const dynamoose = require('../');
 
 
 /*
@@ -22,9 +22,9 @@ dynamoose.AWS.config.update({
 // dynamoose.local(); // Use a local DynamoDB
 
 
-var Cat = dynamoose.model('Cat', { id: Number, name: String });
+const Cat = dynamoose.model('Cat', {id: Number, name: String});
 
-var garfield = new Cat({id: 666, name: 'Garfield'});
+const garfield = new Cat({id: 666, name: 'Garfield'});
 
 garfield.save();
 

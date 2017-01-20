@@ -48,6 +48,7 @@
   "dependencies": {
     "aws-sdk": "^2.7.25",
     "debug": "*",
+    "es-nodeify": "^1.0.0",
     "hooks": "0.3.2",
     "lodash": "^4.17.4",
     "q": "~1.0.1"
