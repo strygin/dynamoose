@@ -115,12 +115,12 @@ describe('Model', function() {
     this.timeout(12000);
 
 
-    Cat.should.have.property('$__');
+    //Cat.should.have.property('$__');
 
-    Cat.$__.name.should.eql('test-Cat');
-    Cat.$__.options.should.have.property('create', true);
+    Cat.name.should.eql('test-Cat');
+    Cat.options.should.have.property('create', true);
 
-    var schema = Cat.$__.schema;
+    var schema = Cat.schema;
 
     should.exist(schema);
 
@@ -176,18 +176,17 @@ describe('Model', function() {
 
     kitten.save(done);
 
-
   });
 
   it('Create simple model with range key', function() {
 
 
-    Cat2.should.have.property('$__');
+    //Cat2.should.have.property('$__');
 
-    Cat2.$__.name.should.eql('test-Cat2');
-    Cat2.$__.options.should.have.property('create', true);
+    Cat2.name.should.eql('test-Cat2');
+    Cat2.options.should.have.property('create', true);
 
-    var schema = Cat2.$__.schema;
+    var schema = Cat2.schema;
 
     should.exist(schema);
 
@@ -217,7 +216,7 @@ describe('Model', function() {
       model.should.have.property('id', 1);
       model.should.have.property('name', 'Fluffy');
       model.should.have.property('vet', { address: '12 somewhere', name: 'theVet' });
-      model.should.have.property('$__');
+      //model.should.have.property('$__');
       done();
     });
   });
@@ -310,6 +309,9 @@ describe('Model', function() {
 
   it('Save with a pre hook', function(done) {
     var flag = false;
+    // console.log('Cat- %s', Cat);
+    // console.log('Cat-- %s', Cat.pre);
+    // console.log('Cat %s', JSON.stringify(Cat));
     Cat.pre('save', function(next) {
       flag = true;
       next();
@@ -379,8 +381,6 @@ describe('Model', function() {
   });
 
   it('Get missing item', function(done) {
-
-
     Cat.get(1, function(err, model) {
       should.not.exist(err);
       should.not.exist(model);

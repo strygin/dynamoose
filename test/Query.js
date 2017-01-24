@@ -99,7 +99,7 @@ describe('Query', function() {
   after(function(done) {
     var Dog = dynamoose.model('Dog');
 
-    Dog.$__.table.delete(function(err) {
+    Dog.table.delete(function(err) {
       if (err) {
         done(err);
       }
