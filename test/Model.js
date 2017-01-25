@@ -309,9 +309,6 @@ describe('Model', function() {
 
   it('Save with a pre hook', function(done) {
     var flag = false;
-    // console.log('Cat- %s', Cat);
-    // console.log('Cat-- %s', Cat.pre);
-    // console.log('Cat %s', JSON.stringify(Cat));
     Cat.pre('save', function(next) {
       flag = true;
       next();
