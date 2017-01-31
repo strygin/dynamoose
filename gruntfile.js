@@ -2,21 +2,15 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    jshint: {
+    eslint: {
+      src: ['gruntfile.js', 'index.js', 'lib/**/*.js']
+    },
+    eslint2: {
       app: {
-        src: ['gruntfile.js', 'index.js', 'lib/**/*.js'],
-        options: {
-          node: true,
-          jshintrc: '.jshintrc'
-        }
+        src: ['gruntfile.js', 'index.js', 'lib/**/*.js']
       },
       test: {
-        src: ['test/**/*.js'],
-        options: {
-          node: true,
-          jshintrc: 'test/.jshintrc',
-          ignores: ['test/coverage/**/*.js']
-        }
+        src: ['test/**/*.js']
       }
     },
     mochaTest: {
@@ -43,19 +37,18 @@ module.exports = function(grunt) {
   });
 
   // Load libs
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('gruntify-eslint');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  //grunt.loadNpmTasks('grunt-istanbul');
   grunt.loadNpmTasks('grunt-mocha-istanbul');
 
   grunt.event.on('coverage', function(lcovFileContents, done) {
     done();
   });
 
-  grunt.registerTask('default', ['jshint', 'mochaTest']);
-  grunt.registerTask('test', ['jshint', 'mochaTest:test']);
-  grunt.registerTask('coverage', ['jshint', 'clean:coverage', 'mocha_istanbul:coverage']);
-
+  grunt.registerTask('default', ['eslint', 'mochaTest']);
+  grunt.registerTask('test', ['eslint', 'mochaTest:test']);
+  grunt.registerTask('test-nolint', ['mochaTest:test']);
+  grunt.registerTask('coverage', ['eslint', 'clean:coverage', 'mocha_istanbul:coverage']);
 };
 

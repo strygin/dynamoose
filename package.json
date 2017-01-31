@@ -14,6 +14,7 @@
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
+    "test-nolint": "grunt test-nolint",
     "coverage": "grunt coverage"
   },
   "keywords": [
@@ -42,11 +43,12 @@
     "@types/node": "^7.0.4",
     "@types/q": "0.0.32",
     "@types/should": "^8.1.30",
+    "eslint": "^3.14.1",
     "grunt": "*",
     "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-jshint": "^1.1.0",
     "grunt-mocha-istanbul": "^5.0.2",
     "grunt-mocha-test": "^0.13.2",
+    "gruntify-eslint": "^3.1.0",
     "istanbul": "^0.4.5",
     "mocha": "*",
     "should": "*"

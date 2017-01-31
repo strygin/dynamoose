@@ -29,6 +29,6 @@ const garfield = new Cat({id: 666, name: 'Garfield'});
 garfield.save();
 
 Cat.get(666)
-.then(function (badCat) {
+.then(function(badCat) {
   console.log('Never trust a smiling cat. - ' + badCat.name);
 });
