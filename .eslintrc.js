@@ -189,7 +189,7 @@ module.exports = {
     // 'block-spacing': 0,
     'brace-style': [2, '1tbs', { 'allowSingleLine': true }],
     'camelcase': [2, {properties: 'never'}],
-    'comma-dangle': [2, 'only-multiline'],
+    'comma-dangle': [2, 'always-multiline'],
     'comma-spacing': 2,
     'comma-style': 2,
     'computed-property-spacing': 2,
@@ -287,7 +287,7 @@ module.exports = {
     // http://eslint.org/docs/rules/#ecmascript-6
     // ------------------------------------------
     // 'arrow-body-style': 0,
-    'arrow-parens': [2, 'as-needed'],
+    'arrow-parens': 2,
     // 'arrow-spacing': 0,
     'constructor-super': 2, // eslint:recommended
     'generator-star-spacing': [2, 'after'],

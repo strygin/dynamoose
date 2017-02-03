@@ -8,6 +8,7 @@ coverage.html
 coverage/
 lib-cov/
 .vscode
+npm-debug.*
 
 # Ignore webstorm directories
 .idea/

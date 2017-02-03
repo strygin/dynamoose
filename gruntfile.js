@@ -3,37 +3,37 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     eslint: {
-      src: ['gruntfile.js', 'index.js', 'lib/**/*.js']
+      src: ['gruntfile.js', 'index.js', 'lib/**/*.js'],
     },
     eslint2: {
       app: {
-        src: ['gruntfile.js', 'index.js', 'lib/**/*.js']
+        src: ['gruntfile.js', 'index.js', 'lib/**/*.js'],
       },
       test: {
-        src: ['test/**/*.js']
-      }
+        src: ['test/**/*.js'],
+      },
     },
     mochaTest: {
       test: {
         options: {
-          reporter: 'spec'
+          reporter: 'spec',
         },
-        src: ['test/**/*.js']
-      }
+        src: ['test/**/*.js'],
+      },
     },
     mocha_istanbul: {
       coverage: {
         src: 'test',
         options: {
-          mask: '*.js'
-        }
-      }
+          mask: '*.js',
+        },
+      },
     },
     clean: {
       coverage: {
-        src: ['coverage/']
-      }
-    }
+        src: ['coverage/'],
+      },
+    },
   });
 
   // Load libs
