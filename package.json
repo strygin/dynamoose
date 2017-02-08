@@ -41,7 +41,6 @@
     "@types/lodash": "^4.14.50",
     "@types/mocha": "^2.2.38",
     "@types/node": "^7.0.4",
-    "@types/q": "0.0.32",
     "@types/should": "^8.1.30",
     "eslint": "^3.14.1",
     "grunt": "*",
@@ -55,10 +54,10 @@
   },
   "dependencies": {
     "aws-sdk": "^2.7.25",
+    "bluebird": "^3.4.7",
     "debug": "*",
     "es-nodeify": "^1.0.0",
     "hooks": "0.3.2",
-    "lodash": "^4.17.4",
-    "q": "~1.0.1"
+    "lodash": "^4.17.4"
   }
 }
